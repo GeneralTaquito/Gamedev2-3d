@@ -9,33 +9,23 @@ public class WASDmanager : MonoBehaviour
 
     void Start()
     {
-        RB = GetComponent<Rigidbody>();
+
     }
+
     void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 vel = new Vector3(0, 0, 0);
-        if (Input.GetKey(KeyCode.A))
-        {
-            vel.x = -speed;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            vel.z = -speed;
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            vel.z = speed;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            vel.x = speed;
-        }
-        RB.linearVelocity = vel;
+        MovePlayer();
+    }
+        
+    void MovePlayer()
+    {
+        float HorizontalInput = Input.GetAxis("Horizontal");
+        float VerticalInput = Input.GetAxis("Vertical");
 
+        Vector3 worldDir = new Vector3(HorizontalInput, 0, VerticalInput) * speed;
+        transform.position += worldDir * Time.deltaTime;
 
-        float mouseX = mousePos.x;
-        float mousey = mousePos.y;
+        Vector3 localDir = transform.InverseTransformDirection(worldDir.normalized);
     }
         
 }

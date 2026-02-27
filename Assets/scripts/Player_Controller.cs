@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Player_Controller : MonoBehaviour
 {
     public float Walkspeed = 10f;
-    public float SprintSpeed = 20f;
+    public float SprintSpeed = 2f;
     public float JumpF = 5f;
     public float GCD = 1.5f;
     public float LookSensX = 1f;
@@ -22,11 +22,14 @@ public class Player_Controller : MonoBehaviour
 
     void Awake()
     {
+        //Calling charcon
         characterController = GetComponent<CharacterController>();
+        //Locking cursor movement
         Cursor.lockState = CursorLockMode.Locked;
     }
     void Update()
     {
+        //movement
         float horizontalMovement = Input.GetAxis("Horizontal");
         float verticalMovement = Input.GetAxis("Vertical");
 
@@ -34,6 +37,8 @@ public class Player_Controller : MonoBehaviour
         movedirection.Normalize();
 
         float speed = Walkspeed;
+
+        //sprinting (multiplies by the sprint speed float)
         if (Input.GetAxis("Sprint") > 0)
         {
             speed *= SprintSpeed;
@@ -41,6 +46,7 @@ public class Player_Controller : MonoBehaviour
 
         characterController.Move(movedirection * speed * Time.deltaTime);
 
+        // Jumping only allowed during a "grounded" state
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             velocity.y = JumpF;
@@ -52,6 +58,7 @@ public class Player_Controller : MonoBehaviour
 
         characterController.Move(velocity * Time.deltaTime);
 
+        //Camera rotation using mouse movement
         if(Playercam != null)
         {
             float mouseX = Input.GetAxis("Mouse X") * LookSensX;
@@ -65,6 +72,7 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+    //The bool required to confirm jumping 
     bool IsGrounded()
     {
         RaycastHit hit;

@@ -10,6 +10,7 @@ public class gamemanager : MonoBehaviour
 
     void Update()
     {
+        //timer bs
         Timer -= Time.deltaTime;
         timeText.text = Timer.ToString("0");
         

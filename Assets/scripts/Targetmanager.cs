@@ -6,7 +6,7 @@ public class Targetmanager : MonoBehaviour
     public Vector3 MinArea;
     public Vector3 MaxArea;
     private int TargetCount = 0;
-    private int MaxTargetCount = 15;
+    private int MaxTargetCount = 20;
 
     void Start()
     {
@@ -18,7 +18,7 @@ public class Targetmanager : MonoBehaviour
         if (TargetCount < MaxTargetCount)
         {
             float randomX = Random.Range(MinArea.x, MaxArea.x);
-            float randomY = Random.Range(MinArea.Y, MaxArea.Y);
+            float randomY = Random.Range(MinArea.y, MaxArea.y);
 
             Vector3 randomSpawnPosition = new Vector3(randomX, randomY, 0);
 

@@ -6,11 +6,11 @@ public class Targetmanager : MonoBehaviour
     public Vector3 MinArea;
     public Vector3 MaxArea;
     private int TargetCount = 0;
-    private int MaxTargetCount = 20;
+    private int MaxTargetCount = 45;
 
     void Start()
     {
-        InvokeRepeating("SpawnTarget", 0f, 2f);
+        InvokeRepeating("SpawnTarget", 0f, 1.5f);
     }
 
     void SpawnTarget()
@@ -19,8 +19,9 @@ public class Targetmanager : MonoBehaviour
         {
             float randomX = Random.Range(MinArea.x, MaxArea.x);
             float randomY = Random.Range(MinArea.y, MaxArea.y);
+            float randomZ = Random.Range(MinArea.z, MaxArea.z);
 
-            Vector3 randomSpawnPosition = new Vector3(randomX, randomY, 0);
+            Vector3 randomSpawnPosition = new Vector3(randomX, randomY, randomZ);
 
             GameObject Newobject = Instantiate(Target, randomSpawnPosition, Quaternion.identity);
 
